@@ -2,23 +2,28 @@ package com.bananaapps.bananamusic.domain.music;
 
 import lombok.*;
 
+
+import javax.persistence.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @ToString
+@Entity
 public class PurchaseOrderLineSong {
+  @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lineNumber;
+
+    @ManyToOne()
+    @JoinColumn(name = "orderId")
+    private PurchaseOrder order;
+
+    @OneToOne
+    @JoinColumn(name = "songId")
     private Song song;
     private Integer quantity;
-
-    public PurchaseOrderLineSong(Long lineNumber, Song song, Integer quantity, Double unitPrice) {
-        this.lineNumber = lineNumber;
-        this.song = song;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
-    }
-
     private Double unitPrice;
 
 

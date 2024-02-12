@@ -1,11 +1,17 @@
 package com.bananaapps.bananamusic.persistence.music;
 
+import com.bananaapps.bananamusic.config.SpringConfig;
 import com.bananaapps.bananamusic.domain.music.PurchaseOrder;
 import com.bananaapps.bananamusic.domain.music.PurchaseOrderLineSong;
 import com.bananaapps.bananamusic.domain.music.Song;
 import com.bananaapps.bananamusic.domain.user.User;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -14,7 +20,10 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {SpringConfig.class})
+@EnableAutoConfiguration
+@ActiveProfiles({"prod"})
 class PurchaseOrderRepositoryTest {
 
     @Autowired
@@ -39,15 +48,14 @@ class PurchaseOrderRepositoryTest {
     void given_existingOrder_WHEN_save_Then_OK() {
 
         List<PurchaseOrderLineSong> lines = List.of(
-                new PurchaseOrderLineSong(null, new Song(1l), 1, 10.0)
+                new PurchaseOrderLineSong(null,null, new Song(1l), 1, 10.0)
         );
 
         PurchaseOrder order = new PurchaseOrder(null, 1, true, LocalDate.now(), new User(1), lines);
 
-        // TODO: uncomment when relations set
-        /*for (PurchaseOrderLineSong line : lines) {
+        for (PurchaseOrderLineSong line : lines) {
             line.setOrder(order);
-        }*/
+        }
 
         order = repo.save(order);
 

@@ -14,6 +14,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Entity
+@Table(name = "DownloadableItem")
+@PrimaryKeyJoinColumn(name = "tuneId")
 public class OfflineSong extends Song {
 
     private String url;
