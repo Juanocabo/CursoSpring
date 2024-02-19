@@ -11,10 +11,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @ComponentScan({"com.bananaapps.bananamusic.persistence","com.bananaapps.bananamusic.service"})
-@Import({RepoConfig.class, ServiceConfig.class})
 @EnableJpaRepositories("com.bananaapps.bananamusic.persistence")
 @EntityScan("com.bananaapps.bananamusic.domain")
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 @EnableAutoConfiguration
 public class SpringConfig {
 

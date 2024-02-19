@@ -1,0 +1,60 @@
+spring:
+  application.name: bananaMusic
+  profiles.active: dev
+
+---
+spring:
+  application.name: bananaMusic
+  profiles: dev
+
+  sql.init.mode: always
+  datasource:
+    url: "jdbc:h2:mem:bananamusic_db"
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+      generate-ddl: true
+    defer-datasource-initialization: true
+  h2:
+    console.enabled: true
+    console.path: /h2-ui
+
+server:
+  port: 9090
+
+
+
+
+logging:
+  level.root: INFO
+  file.path: /tmp/logs
+
+
+---
+spring:
+  application.name: bananaMusic
+  profiles: prod
+  sql.init.mode: always
+  datasource:
+    url: "jdbc:mysql://127.0.0.1:3306/bananamusicdb"
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: banana
+    password: platano
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+      generate-ddl: true
+    defer-datasource-initialization: true
+server.port: 8080
+
+logging:
+  level.root: WARN
+  file.path: /tmp/logs
+---
