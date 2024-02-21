@@ -1,18 +1,15 @@
 package com.bananaapps.bananamusic.config;
 
-import com.bananaapps.bananamusic.persistence.music.SongJPARepository;
+import com.bananaapps.bananamusic.persistence.music.JpaSongRepository;
 import com.bananaapps.bananamusic.persistence.music.SongRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RepoConfig {
-
-
+public class SpringRepositoryConfig {
     @Bean
-    public SongRepository songRepository() {
-        return new SongJPARepository();
+    public SongRepository jpaSongRepository() {
+        return new JpaSongRepository();
     }
-
 
 }

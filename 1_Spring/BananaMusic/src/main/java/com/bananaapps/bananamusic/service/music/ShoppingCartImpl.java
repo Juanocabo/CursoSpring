@@ -6,6 +6,7 @@ import com.bananaapps.bananamusic.domain.user.User;
 import com.bananaapps.bananamusic.exception.SongNotfoundException;
 import com.bananaapps.bananamusic.exception.UserNotfoundException;
 import com.bananaapps.bananamusic.persistence.UserRepository;
+import com.bananaapps.bananamusic.persistence.music.JpaPurchaseOrderRepository;
 import com.bananaapps.bananamusic.persistence.music.PurchaseOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ public class ShoppingCartImpl implements ShoppingCart {
                 break;
             }
         }
-        throw new SongNotfoundException();
+        throw new SongNotfoundException("Song not found");
     }
 
     @Override
@@ -72,7 +73,7 @@ public class ShoppingCartImpl implements ShoppingCart {
         try {
             // simulated user. Must exist in ddbb
             User currentUser = userRepo.findByEmailAndPassword("juan@j.com", "jjjj").orElseThrow(() -> {
-                throw new UserNotfoundException();
+                throw new UserNotfoundException("User not found");
             });
 
             PurchaseOrder purchase = new PurchaseOrder(null, 1, LocalDate.of(2024, 1, 28), currentUser, items);

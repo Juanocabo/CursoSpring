@@ -1,10 +1,8 @@
 package com.bananaapps.bananamusic.persistence.music;
 
 import com.bananaapps.bananamusic.domain.music.PurchaseOrder;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-
 
 public interface PurchaseOrderRepository {
 

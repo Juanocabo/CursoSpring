@@ -1,7 +1,5 @@
 package com.bananaapps.bananamusic.domain.music;
 
-import javax.persistence.Entity;
-
 public enum SongCategory {
 	ALTERNATIVE ("Alternative"), 
 	BLUES ("Blues"), 

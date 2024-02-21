@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -14,15 +15,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.Collection;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {SpringConfig.class})
-@EnableAutoConfiguration
-@ActiveProfiles({"prod"})
+@SpringBootTest
+@ActiveProfiles({"dev"}) // for activate profile dev
+//@ActiveProfiles({"prod"}) // for activate profile prod
 class SongRepositoryTest {
     @Autowired
     SongRepository repo;
@@ -52,7 +53,7 @@ class SongRepositoryTest {
 
     @Test
     void given_invalidKeyword_When_findByKeyword_Then_null() {
-        String keyword = "axx";
+        String keyword = "no existe";
         Collection<Song> songs = repo.findByKeyword(keyword);
         assertThat(songs, empty());
         assertThat(songs.size(), equalTo(0));
@@ -63,8 +64,8 @@ class SongRepositoryTest {
         Song newSong = new Song("Mamma mia", "ABBA", "1999-04-30", new BigDecimal(18.0), SongCategory.POP);
 
         Song savedSong = repo.save(newSong);
-      //  assertThat(savedSong, empty());
+        assertThat(savedSong, notNullValue());
         assertThat(savedSong.getId(), greaterThan(0L));
     }
-    
+
 }

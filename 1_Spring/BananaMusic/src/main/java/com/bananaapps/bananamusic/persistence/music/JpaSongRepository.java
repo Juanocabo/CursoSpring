@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bananaapps.bananamusic.domain.music.SongCategory;
 import com.bananaapps.bananamusic.domain.music.Song;
 
-public class SongJPARepository implements SongRepository {
+public class JpaSongRepository implements SongRepository {
 
     @PersistenceContext
     private EntityManager em;

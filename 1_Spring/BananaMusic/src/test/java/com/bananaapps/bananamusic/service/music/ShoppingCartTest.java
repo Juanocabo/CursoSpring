@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -19,10 +20,9 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {SpringConfig.class})
-@EnableAutoConfiguration
-@ActiveProfiles({"prod"})
+
+@SpringBootTest
+@ActiveProfiles({"dev"})
 class ShoppingCartTest {
 
     @Autowired
@@ -44,15 +44,15 @@ class ShoppingCartTest {
         assertThat(bal, is(0d));
     }
 
-
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 5, 10, 1000})
     void when_the_cart_is_empty_has_0_items(int numProducts) throws Exception {
         Random rand = new Random();
 
         for (int i = 0; i < numProducts; i++) {
-            cart.addItem(new PurchaseOrderLineSong(1L,null, null, 2, rand.nextDouble() * 100));
+            cart.addItem(new PurchaseOrderLineSong(1L, null, null, 2, rand.nextDouble() * 100));
         }
+
 
         cart.empty();
 
@@ -79,7 +79,7 @@ class ShoppingCartTest {
         // when
         for (int i = 0; i < numProducts; i++) {
             double precio = rand.nextDouble() * 100;
-            cart.addItem(new PurchaseOrderLineSong(1L, null,null, 1, precio));
+            cart.addItem(new PurchaseOrderLineSong(1L, null, null, 1, precio));
 
             inc += precio;
         }
@@ -110,7 +110,7 @@ class ShoppingCartTest {
         Random rand = new Random();
 
         for (int i = 0; i < 3; i++) {
-            cart.addItem(new PurchaseOrderLineSong(1L, null,null, 2, rand.nextDouble() * 100));
+            cart.addItem(new PurchaseOrderLineSong(1L, null, null, 2, rand.nextDouble() * 100));
         }
 
         cart.buy();
