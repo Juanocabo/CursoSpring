@@ -13,7 +13,7 @@
     <groupId>com.bananaapps</groupId>
     <artifactId>BananaMusic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BananaMusic3Sol</name>
+    <name>BananaMusic4Sol</name>
     <description>BananaMusic project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
@@ -85,7 +85,6 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
